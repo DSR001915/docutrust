@@ -1,0 +1,156 @@
+{
+  "_comment": "Golden eval set for DocuTrust, written against sample_data/corporate_policy_handbook.pdf. 'expected_answer_contains' lists are case-insensitive substrings that should appear in a GOOD answer; used as the (intentionally crude) faithfulness check in run_eval.py alongside the optional RAGAS-based scoring. 'in_corpus' marks whether the document handbook actually contains the answer -- out-of-corpus questions test correction/abstention behavior, not retrieval accuracy.",
+
+  "questions": [
+    {
+      "id": "q01",
+      "question": "How long must customer transaction records be retained?",
+      "in_corpus": true,
+      "expected_answer_contains": ["seven", "7", "years"]
+    },
+    {
+      "id": "q02",
+      "question": "How long are employee records kept after termination?",
+      "in_corpus": true,
+      "expected_answer_contains": ["five", "5", "years"]
+    },
+    {
+      "id": "q03",
+      "question": "What method must be used to destroy physical documents after the retention period?",
+      "in_corpus": true,
+      "expected_answer_contains": ["cross-cut", "shred"]
+    },
+    {
+      "id": "q04",
+      "question": "What standard must be used to wipe digital records?",
+      "in_corpus": true,
+      "expected_answer_contains": ["dod", "5220.22"]
+    },
+    {
+      "id": "q05",
+      "question": "Who must approve a request for expanded data access?",
+      "in_corpus": true,
+      "expected_answer_contains": ["manager", "data protection officer"]
+    },
+    {
+      "id": "q06",
+      "question": "Is single-factor authentication allowed for Tier 1 systems?",
+      "in_corpus": true,
+      "expected_answer_contains": ["not permitted", "no", "mfa", "multi-factor"]
+    },
+    {
+      "id": "q07",
+      "question": "How often are access reviews conducted?",
+      "in_corpus": true,
+      "expected_answer_contains": ["quarterly"]
+    },
+    {
+      "id": "q08",
+      "question": "After how many days of inactivity is account access automatically revoked?",
+      "in_corpus": true,
+      "expected_answer_contains": ["90"]
+    },
+    {
+      "id": "q09",
+      "question": "What is the maximum duration for a privileged administrator access grant?",
+      "in_corpus": true,
+      "expected_answer_contains": ["30 days"]
+    },
+    {
+      "id": "q10",
+      "question": "Within how many hours must a suspected security incident be reported to the SOC?",
+      "in_corpus": true,
+      "expected_answer_contains": ["one", "1 hour"]
+    },
+    {
+      "id": "q11",
+      "question": "How quickly must the SOC classify incident severity?",
+      "in_corpus": true,
+      "expected_answer_contains": ["two", "2 hour"]
+    },
+    {
+      "id": "q12",
+      "question": "If an incident involves unauthorized PII access, when must Legal and Compliance be notified?",
+      "in_corpus": true,
+      "expected_answer_contains": ["four", "4 hour"]
+    },
+    {
+      "id": "q13",
+      "question": "How long after incident closure must the post-incident review be completed?",
+      "in_corpus": true,
+      "expected_answer_contains": ["ten", "10 business days"]
+    },
+    {
+      "id": "q14",
+      "question": "What security software must be installed on company laptops used for remote work?",
+      "in_corpus": true,
+      "expected_answer_contains": ["edr", "endpoint detection"]
+    },
+    {
+      "id": "q15",
+      "question": "Can remote employees use personal devices to access company email?",
+      "in_corpus": true,
+      "expected_answer_contains": ["prohibited", "mdm", "mobile device management"]
+    },
+    {
+      "id": "q16",
+      "question": "Is split-tunneling permitted on the company VPN?",
+      "in_corpus": true,
+      "expected_answer_contains": ["not permitted", "exception"]
+    },
+    {
+      "id": "q17",
+      "question": "Within how many days must business travel expenses be submitted?",
+      "in_corpus": true,
+      "expected_answer_contains": ["thirty", "30 days"]
+    },
+    {
+      "id": "q18",
+      "question": "What is the daily meal reimbursement cap for international travel?",
+      "in_corpus": true,
+      "expected_answer_contains": ["100", "$100"]
+    },
+    {
+      "id": "q19",
+      "question": "What receipt documentation is required for expenses over $25?",
+      "in_corpus": true,
+      "expected_answer_contains": ["itemized receipt"]
+    },
+    {
+      "id": "q20",
+      "question": "For flights under six hours, what airfare class must be booked?",
+      "in_corpus": true,
+      "expected_answer_contains": ["economy"]
+    },
+    {
+      "id": "q21",
+      "question": "What is the company's policy on pet adoption leave?",
+      "in_corpus": false,
+      "expected_answer_contains": ["don't have", "not", "no information", "cannot find", "doesn't cover", "unable"]
+    },
+    {
+      "id": "q22",
+      "question": "What is the boiling point of liquid nitrogen?",
+      "in_corpus": false,
+      "expected_answer_contains": ["don't have", "not", "no information", "cannot find", "unable"]
+    },
+    {
+      "id": "q23",
+      "question": "What is the company's maternity leave policy?",
+      "in_corpus": false,
+      "expected_answer_contains": ["don't have", "not", "no information", "cannot find", "doesn't cover", "unable"]
+    },
+    {
+      "id": "q24",
+      "question": "Recommend a good recipe for chocolate chip cookies",
+      "in_corpus": false,
+      "expected_answer_contains": ["don't have", "not", "no information", "cannot find", "unable"]
+    },
+    {
+      "id": "q25",
+      "question": "What stock trading restrictions apply to employees during blackout periods?",
+      "in_corpus": false,
+      "expected_answer_contains": ["don't have", "not", "no information", "cannot find", "doesn't cover", "unable"]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+# Minimal dependency set for running DocuTrust in mock mode (the default --
+# see backend/config.py PROVIDER_MODE). This is what the Dockerfile installs
+# by default so `docker-compose up` is fast and needs no GPU/HuggingFace/API
+# access. For real embeddings/reranking/LLM calls, install the full
+# requirements.txt instead (adds torch, sentence-transformers, ragas) and
+# set DOCUTRUST_PROVIDER_MODE=local / LLM_PROVIDER=anthropic|ollama in .env.
+
+fastapi==0.138.1
+uvicorn[standard]==0.49.0
+python-multipart==0.0.32
+websockets==15.0.1
+pydantic==2.13.4
+pydantic-settings==2.14.2
+python-dotenv>=1.0,<2.0
+
+pymongo==4.17.0
+
+pypdf==5.9.0
+numpy==2.4.4
+
+chromadb==1.5.9
+
+langgraph==1.2.6
+langchain-core==1.4.8
+
+anthropic==0.112.0
+ollama==0.4.7
+tavily-python==0.5.0
+
+reportlab==4.4.10
+
+pytest==8.3.5
+pytest-asyncio==0.25.2

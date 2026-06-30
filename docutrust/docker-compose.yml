@@ -1,0 +1,65 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: docutrust-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: docutrust-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      # --- Provider mode: "mock" needs no API keys / model downloads and
+      #     is what this repo's own tests + eval run against. Switch to
+      #     "local" once you're on a machine with HuggingFace access, and
+      #     set LLM_PROVIDER below to use a real model for generation.
+      #
+      #     NOTE: these env var names must match backend/config.py's
+      #     Settings field names exactly (pydantic-settings matches by
+      #     field name, case-insensitively -- it does NOT support arbitrary
+      #     aliases unless explicitly configured). If you add a new setting
+      #     to Settings, the env var here must be spelled the same way. ---
+      DOCUTRUST_PROVIDER_MODE: ${DOCUTRUST_PROVIDER_MODE:-mock}
+      LLM_PROVIDER: ${LLM_PROVIDER:-mock}
+      WEB_SEARCH_PROVIDER: ${WEB_SEARCH_PROVIDER:-mock}
+
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      ANTHROPIC_MODEL: ${ANTHROPIC_MODEL:-claude-sonnet-4-6}
+      OLLAMA_HOST: ${OLLAMA_HOST:-http://host.docker.internal:11434}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-llama3.1:8b}
+      TAVILY_API_KEY: ${TAVILY_API_KEY:-}
+
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-BAAI/bge-small-en-v1.5}
+      RERANKER_MODEL: ${RERANKER_MODEL:-BAAI/bge-reranker-v2-m3}
+
+      MONGO_URI: mongodb://mongo:27017
+      MONGO_DB_NAME: ${MONGO_DB_NAME:-docutrust}
+
+      CHROMA_PERSIST_DIR: /app/data/chroma
+      CHROMA_COLLECTION: ${CHROMA_COLLECTION:-docutrust_chunks}
+    volumes:
+      - chroma_data:/app/data/chroma
+    extra_hosts:
+      # Lets the container reach Ollama running on the host machine, if
+      # you're using LLM_PROVIDER=ollama outside of Docker.
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  mongo_data:
+  chroma_data:

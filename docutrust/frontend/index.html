@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DocuTrust — Self-Correcting Document Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-brand">
+      <span class="brand-mark">DT</span>
+      <div class="brand-text">
+        <span class="brand-name">DocuTrust</span>
+        <span class="brand-tagline">Self-correcting document intelligence</span>
+      </div>
+    </div>
+    <div class="topbar-status" id="statusBadge">
+      <span class="status-dot"></span>
+      <span id="statusText">connecting…</span>
+    </div>
+  </header>
+
+  <main class="case-file">
+
+    <!-- LEFT: Evidence / document pane -->
+    <section class="pane pane-evidence" aria-label="Documents">
+      <div class="pane-header">
+        <span class="pane-label">Exhibits</span>
+        <span class="pane-sublabel" id="docCount">0 documents</span>
+      </div>
+
+      <form id="uploadForm" class="upload-zone">
+        <input type="file" id="fileInput" accept="application/pdf" hidden />
+        <label for="fileInput" class="upload-trigger">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Drop a PDF or click to upload</span>
+        </label>
+        <div class="upload-status" id="uploadStatus"></div>
+      </form>
+
+      <ul class="exhibit-list" id="documentList">
+        <!-- populated by app.js -->
+      </ul>
+    </section>
+
+    <!-- CENTER: Live verification ledger -->
+    <section class="pane pane-ledger" aria-label="Agent reasoning trace">
+      <div class="pane-header">
+        <span class="pane-label">Verification Ledger</span>
+        <span class="pane-sublabel" id="ledgerSublabel">awaiting query</span>
+      </div>
+
+      <div class="ledger-scroll" id="ledgerScroll">
+        <div class="ledger-empty" id="ledgerEmpty">
+          <p>Every retrieval gets graded before it reaches the answer.</p>
+          <p class="ledger-empty-sub">Ask a question to watch the self-correction process unfold, stamp by stamp.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT: Answer / brief pane -->
+    <section class="pane pane-brief" aria-label="Answer">
+      <div class="pane-header">
+        <span class="pane-label">Brief</span>
+        <span class="pane-sublabel" id="briefSublabel">—</span>
+      </div>
+
+      <div class="brief-scroll" id="briefScroll">
+        <div class="brief-empty">
+          <p>Your cited answer will appear here.</p>
+        </div>
+      </div>
+
+      <div class="exhibits-cited" id="exhibitsCited" hidden>
+        <span class="exhibits-cited-label">Cited sources</span>
+        <div class="exhibits-cited-list" id="exhibitsCitedList"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="query-bar">
+    <input
+      type="text"
+      id="queryInput"
+      class="query-input"
+      placeholder="Ask a question about your uploaded documents…"
+      autocomplete="off"
+    />
+    <button id="queryButton" class="query-submit">
+      <span>Ask</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 12h14m0 0l-6-6m6 6l-6 6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

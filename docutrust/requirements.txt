@@ -1,0 +1,52 @@
+# --- Core backend ---
+fastapi==0.138.1
+uvicorn[standard]==0.49.0
+python-multipart==0.0.32
+websockets==15.0.1
+pydantic==2.13.4
+pydantic-settings==2.14.2
+python-dotenv>=1.0,<2.0
+
+# --- Database ---
+pymongo==4.17.0
+
+# --- Ingestion ---
+pypdf==5.9.0
+numpy==2.4.4
+
+# --- Embeddings / reranking (CPU-only torch keeps install small; drop the
+#     index-url line and torch will pull CUDA wheels automatically if you
+#     have an NVIDIA GPU + drivers set up). These two are only required
+#     when DOCUTRUST_PROVIDER_MODE=local -- the default "mock" mode (see
+#     backend/config.py) runs without them, which is what this repo's own
+#     tests and eval run against. ---
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.12.1
+sentence-transformers==3.4.1
+
+# --- Vector store ---
+chromadb==1.5.9
+
+# --- Agent orchestration ---
+langgraph==1.2.6
+langchain-core==1.4.8
+
+# --- LLM clients (use whichever you have a key for; both are wired in via
+#     LLM_PROVIDER -- see backend/llm/provider.py) ---
+anthropic==0.112.0
+ollama==0.4.7
+
+# --- Web fallback search ---
+tavily-python==0.5.0
+
+# --- Eval (optional richer scoring; backend/eval/run_eval.py's default
+#     substring-based scoring does not require this) ---
+ragas==0.2.10
+
+# --- Sample data generation (scripts/generate_sample_pdf.py) ---
+reportlab==4.4.10
+
+# --- Dev / testing ---
+pytest==8.3.5
+pytest-asyncio==0.25.2
+
