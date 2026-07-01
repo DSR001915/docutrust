@@ -78,7 +78,7 @@
 
 If you uploaded your MP4 to GitHub Releases:
 
-[![▶ Watch Demo Video](https://img.shields.io/badge/▶_Watch_Demo-Click_to_Play-blue?style=for-the-badge)](https://github.com/yourusername/docutrust/releases/download/v1.0.0/demo.mp4)
+[![▶ Watch Demo Video](https://img.shields.io/badge/▶_Watch_Demo-Click_to_Play-blue?style=for-the-badge)](https://github.com/DSR001915/docutrust/releases/download/v1.0.0/DocutrustRecording_Docker.mp4)
 
 ---
 
